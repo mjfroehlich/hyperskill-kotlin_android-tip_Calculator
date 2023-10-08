@@ -9,16 +9,16 @@ import androidx.appcompat.app.AppCompatActivity
 
 
 class MainActivity : AppCompatActivity() {
-    val editText: TextView by lazy { findViewById(R.id.edit_text) }
-    val billAmountTv: TextView by lazy { findViewById(R.id.bill_value_tv) }
-    val tipPercentTv: TextView by lazy { findViewById(R.id.tip_percent_tv) }
-    val tipPercentSeekBar: SeekBar by lazy { findViewById(R.id.seek_bar) }
-    val tipAmountTv: TextView by lazy { findViewById(R.id.tip_amount_tv) }
+    private val editText: TextView by lazy { findViewById(R.id.edit_text) }
+    private val billAmountTv: TextView by lazy { findViewById(R.id.bill_value_tv) }
+    private val tipPercentTv: TextView by lazy { findViewById(R.id.tip_percent_tv) }
+    private val tipPercentSeekBar: SeekBar by lazy { findViewById(R.id.seek_bar) }
+    private val tipAmountTv: TextView by lazy { findViewById(R.id.tip_amount_tv) }
 
     private val tipPercent: Int
         get() = tipPercentSeekBar.progress
 
-    val billAmount: Double?
+    private val billAmount: Double?
         get() = editText.text.toString().toDoubleOrNull()
 
     private fun clearTextViews() {
