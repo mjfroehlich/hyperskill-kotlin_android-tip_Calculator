@@ -15,6 +15,11 @@ class MainActivity : AppCompatActivity() {
     val tipPercentSeekBar: SeekBar by lazy { findViewById(R.id.seek_bar) }
     val tipAmountTv: TextView by lazy { findViewById(R.id.tip_amount_tv) }
 
+    private fun clearTextViews() {
+        textBillAmount.text = null
+        tipPercentTv.text = null
+        tipAmountTv.text = null
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,9 +29,7 @@ class MainActivity : AppCompatActivity() {
                 val tipPercent = tipPercentSeekBar.progress
                 val amountSt = seq.toString()
                 if (amountSt.isEmpty()) {
-                    textBillAmount.text = null
-                    tipPercentTv.text = null
-                    tipAmountTv.text = null
+                    clearTextViews()
                     return
                 }
                 val amount = amountSt.toDouble()
@@ -35,9 +38,7 @@ class MainActivity : AppCompatActivity() {
                     tipPercentTv.text = String.format("Tip: %d%%", tipPercent)
                     tipAmountTv.text = String.format("Tip Amount: $%.2f", amount * tipPercent / 100)
                 } else {
-                    textBillAmount.text = null
-                    tipPercentTv.text = null
-                    tipAmountTv.text = null
+                    clearTextViews()
                 }
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
