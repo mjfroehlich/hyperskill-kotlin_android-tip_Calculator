@@ -18,6 +18,9 @@ class MainActivity : AppCompatActivity() {
     val tipPercent: Int
         get() = tipPercentSeekBar.progress
 
+    val billAmount: Double?
+        get() = editText.text.toString().toDoubleOrNull()
+
     private fun clearTextViews() {
         textBillAmount.text = null
         tipPercentTv.text = null
@@ -29,47 +32,31 @@ class MainActivity : AppCompatActivity() {
 
         editText.addTextChangedListener(object:TextWatcher {
             override fun onTextChanged(seq: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                val amountSt = seq.toString()
-                if (amountSt.isEmpty()) {
+                if (billAmount == null || billAmount == 0.0) {
                     clearTextViews()
                     return
                 }
-                val amount = amountSt.toDouble()
-                if (amount > 0) {
-                    textBillAmount.text = String.format(getString(R.string.bill_value_format_string), amount)
-                    tipPercentTv.text = String.format(getString(R.string.tip_percentage_format_string), tipPercent)
-                    tipAmountTv.text = String.format(getString(R.string.tip_amount_format_string), amount * tipPercent / 100)
-                } else {
-                    clearTextViews()
-                }
+                textBillAmount.text = String.format(getString(R.string.bill_value_format_string), billAmount)
+                tipPercentTv.text = String.format(getString(R.string.tip_percentage_format_string), tipPercent)
+                tipAmountTv.text = String.format(getString(R.string.tip_amount_format_string), billAmount!! * tipPercent / 100)
             }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                // do nothing
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                // do nothing
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun afterTextChanged(p0: Editable?) {}
         })
 
         tipPercentSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, p2: Boolean) {
-                if (editText.text.isEmpty()) {
+                if (billAmount == null || billAmount == 0.0) {
                     tipPercentTv.text = null
                     tipAmountTv.text = null
                     return
-                }
-                val billValueText = editText.text.toString()
-                if (billValueText.isEmpty()) {
-                    tipPercentTv.text = null
-                    tipAmountTv.text = null
-                    return
-                }
-                val amount = billValueText.toDouble()
-                if (amount > 0) {
-                    tipPercentTv.text = String.format(getString(R.string.tip_percentage_format_string), tipPercent)
-                    tipAmountTv.text = String.format(getString(R.string.tip_amount_format_string), amount * tipPercent / 100)
+                } else {
+                    tipPercentTv.text =
+                        String.format(getString(R.string.tip_percentage_format_string), tipPercent)
+                    tipAmountTv.text = String.format(
+                        getString(R.string.tip_amount_format_string),
+                        billAmount!! * tipPercent / 100
+                    )
                 }
             }
 
