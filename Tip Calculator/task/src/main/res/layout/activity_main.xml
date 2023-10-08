@@ -38,13 +38,4 @@
         android:layout_width="match_parent"
         android:layout_height="53dp" />
 
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text|textAutoCorrect"
-        android:text="Name"
-        android:autofillHints="foo" />
-
 </LinearLayout>
