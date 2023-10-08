@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 val amount = amountSt.toDouble()
                 if (amount > 0) {
-                    textBillAmount.text = String.format("Bill Value: $%.2f", amount)
-                    tipPercentTv.text = String.format("Tip: %d%%", tipPercent)
-                    tipAmountTv.text = String.format("Tip Amount: $%.2f", amount * tipPercent / 100)
+                    textBillAmount.text = String.format(getString(R.string.bill_value_format_string), amount)
+                    tipPercentTv.text = String.format(getString(R.string.tip_percentage_format_string), tipPercent)
+                    tipAmountTv.text = String.format(getString(R.string.tip_amount_format_string), amount * tipPercent / 100)
                 } else {
                     clearTextViews()
                 }
@@ -67,8 +67,8 @@ class MainActivity : AppCompatActivity() {
                 val amount = billValueText.toDouble()
                 val tipPercent = progress
                 if (amount > 0) {
-                    tipPercentTv.text = String.format("Tip: %d%%", tipPercent)
-                    tipAmountTv.text = String.format("Tip Amount: $%.2f", amount * tipPercent / 100)
+                    tipPercentTv.text = String.format(getString(R.string.tip_percentage_format_string), tipPercent)
+                    tipAmountTv.text = String.format(getString(R.string.tip_amount_format_string), amount * tipPercent / 100)
                 }
             }
 

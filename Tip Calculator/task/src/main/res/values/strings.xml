@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Tip calculator</string>
+    <string name="enter_bill_here">Insert Bill Value</string>
+    <string name="bill_value_format_string">Bill Value: $%.2f</string>
+    <string name="tip_percentage_format_string">Tip: %d%%</string>
+    <string name="tip_amount_format_string">Tip Amount: $%.2f</string>
+</resources>
