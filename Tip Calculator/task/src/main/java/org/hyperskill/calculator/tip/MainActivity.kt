@@ -26,6 +26,13 @@ class MainActivity : AppCompatActivity() {
         tipPercentTv.text = null
         tipAmountTv.text = null
     }
+
+    private fun updateNumbersInTextViews() {
+        textBillAmount.text = String.format(getString(R.string.bill_value_format_string), billAmount)
+        tipPercentTv.text = String.format(getString(R.string.tip_percentage_format_string), tipPercent)
+        tipAmountTv.text = String.format(getString(R.string.tip_amount_format_string), billAmount!! * tipPercent / 100)
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -36,9 +43,7 @@ class MainActivity : AppCompatActivity() {
                     clearTextViews()
                     return
                 }
-                textBillAmount.text = String.format(getString(R.string.bill_value_format_string), billAmount)
-                tipPercentTv.text = String.format(getString(R.string.tip_percentage_format_string), tipPercent)
-                tipAmountTv.text = String.format(getString(R.string.tip_amount_format_string), billAmount!! * tipPercent / 100)
+                updateNumbersInTextViews()
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {}
@@ -50,14 +55,8 @@ class MainActivity : AppCompatActivity() {
                     tipPercentTv.text = null
                     tipAmountTv.text = null
                     return
-                } else {
-                    tipPercentTv.text =
-                        String.format(getString(R.string.tip_percentage_format_string), tipPercent)
-                    tipAmountTv.text = String.format(
-                        getString(R.string.tip_amount_format_string),
-                        billAmount!! * tipPercent / 100
-                    )
                 }
+                updateNumbersInTextViews()
             }
 
             override fun onStartTrackingTouch(p0: SeekBar?) {}
